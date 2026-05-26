@@ -1,6 +1,5 @@
 {
-    "name": "chattypatty",
-    "version": "1.0.0",
+  "name": "pxpony-chat",    "version": "1.0.0",
     "description": "A planet-sized metaverse chat application",
   "main": "server.js",
   "scripts": {
