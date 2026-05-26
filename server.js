@@ -9,7 +9,7 @@ const io = require('socket.io')(http, {
 });
 
 app.get('/', (req, res) => {
-    res.send('ChattyPatty Backend Running');
+    res.send('PxPony Chat Backend Running');
 });
 
 // Store connected players with additional metadata
