@@ -12,6 +12,7 @@ const io = require('socket.io')(http, {
 const { loadStats, saveStats, updateAdPlay, addUniqueVisitor } = require('./utilities');
 
 let stats = loadStats();
+const players = new Map();
 
 app.get('/', (req, res) => {
     res.send('PxPony Chat Backend Running');
@@ -168,7 +169,6 @@ app.get('/dashboard', (req, res) => {
 });
 
 // Store connected players with additional metadata
-const players = new Map();
 
 // Constants
 const CHAT_RANGE = 300; // Chat visibility range in pixels
