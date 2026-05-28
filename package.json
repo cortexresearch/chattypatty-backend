@@ -1,11 +1,13 @@
 {
-  "name": "pxpony-chat",    "version": "1.0.0",
+    "name": "pxpony-chat",
+    "version": "1.0.0",
     "description": "A planet-sized metaverse chat application",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js",
+      "test": "jest"
     },
+
     "engines": {
         "node": "18.x",
         "npm": "10.x"
@@ -22,5 +24,8 @@
         "express": "^4.21.1",
         "phaser": "^3.87.0",
         "socket.io": "^4.8.1"
+    },
+    "devDependencies": {
+        "jest": "^30.4.2"
     }
 }
