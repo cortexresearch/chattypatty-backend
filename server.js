@@ -1,5 +1,7 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
+app.use(cors());
 const http = require('http').createServer(app);
 const io = require('socket.io')(http, {
     cors: {
@@ -19,7 +21,8 @@ app.get('/api/stats', (req, res) => {
     res.json({
         totalAdPlays: stats.totalAdPlays,
         adPlays: stats.adPlays,
-        uniqueVisitorsCount: stats.uniqueVisitors.length
+        uniqueVisitorsCount: stats.uniqueVisitors.length,
+        activePlayersCount: players.size
     });
 });
 
