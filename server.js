@@ -298,6 +298,38 @@ io.on('connection', (socket) => {
         }
     });
 
+    // Handle image messages with proximity check
+    socket.on('image-message', ({ imageData }) => {
+        if (players.has(socket.id)) {
+            const sender = players.get(socket.id);
+            sender.lastActivity = Date.now();
+            sender.status = 'active';
+            
+            const timestamp = Date.now();
+            
+            const nearbyPlayers = Array.from(players.entries())
+                .filter(([id, player]) => {
+                    if (id === socket.id) return false;
+                    const dx = player.x - sender.x;
+                    const dy = player.y - sender.y;
+                    return Math.sqrt(dx * dx + dy * dy) <= CHAT_RANGE;
+                });
+
+            nearbyPlayers.forEach(([id]) => {
+                io.to(id).emit('image-received', {
+                    id: socket.id,
+                    imageData: imageData,
+                    timestamp: timestamp
+                });
+            });
+
+            socket.emit('image-sent', {
+                success: true,
+                nearbyPlayers: nearbyPlayers.length
+            });
+        }
+    });
+
     // Handle user status updates
     socket.on('status-update', ({ status }) => {
         if (players.has(socket.id)) {
